@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,11 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.fs.ContentSummary;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.fs.RemoteIterator;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -149,7 +144,7 @@ public class Assignment3_1 extends Configured implements Tool {
 					frequencies.add(new KeyValue(word.toString(), counter));
 					frequencies.remove(frequencies.first());
 				}
-			} else if (!files.contains(word)) { 
+			} else if (file && !files.contains(word)) { 
 				files.add(word);
 				context.getCounter(Counters.FILES_READ).increment(1);
 			}
